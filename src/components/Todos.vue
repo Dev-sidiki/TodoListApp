@@ -78,6 +78,13 @@ export default {
       return this.todos.filter(todo => todo.completed).length > 0
     }
   },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  },
   methods: {
     addTodo () {
       if (this.newTodo.trim().length === 0) {
@@ -95,6 +102,23 @@ export default {
     /* Methode de supression  */
     removeTodo (index) {
       this.todos.splice(index, 1)
+    },
+    /* Methode de modification */
+    editTodo (todo) {
+      this.beforeEditCache = todo.title
+      todo.editing = true
+    },
+    /** Methode fin de modification */
+    doneEdit (todo) {
+      if (todo.title.trim() === '') {
+        todo.title = this.beforeEditCache
+      }
+      todo.editing = false
+    },
+    /** Methode qui permet d'annuler une modification en  */
+    cancelEdit (todo) {
+      todo.title = this.beforeEditCache
+      todo.editing = false
     },
     /* eslint-disable */
     /** Methode qui permet de cocher toutes les tâches */

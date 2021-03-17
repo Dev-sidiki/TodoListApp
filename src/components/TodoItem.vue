@@ -52,13 +52,6 @@ export default {
       this.completed = this.checkAll ? true : this.todo.completed
     }
   },
-  directives: {
-    focus: {
-      inserted: function (el) {
-        el.focus()
-      }
-    }
-  },
   /**  Methode removeTodo eventListener qui permet au parent(todos) d'écouter une acttion sur les item todo */
   methods: {
     removeTodo (index) {
